@@ -10,9 +10,11 @@ def get_ood_accuracy(model, datasets):
         df = get_experimental_data(d, [model.replace('_', '-')])
         df_selection = df.loc[(df["subj"] == model)]
         ood_accuracy_tmp = a.SixteenClassAccuracy().analysis(df_selection)['16-class-accuracy']
+        assert 0 <= ood_accuracy_tmp <= 1
         ood_accuracies.append(ood_accuracy_tmp)
         ood_accuracy[d.name] = ood_accuracy_tmp
     ood_accuracy['all'] = sum(ood_accuracies) / len(ood_accuracies)
+    assert 0 <= ood_accuracy['all'] <= 1
     return ood_accuracy
 
 
@@ -25,9 +27,11 @@ def get_accuracy_difference(model, datasets, config):
         df_human = df.loc[df["subj"].isin(config.HUMAN_DATA_DICT[d.name])]
         accuracy_difference_tmp = a.SixteenClassAccuracyDifference().analysis(df_model, df_human)[
             '16-class-accuracy-difference']
+        assert 0 <= accuracy_difference_tmp <= 1
         accuracy_difference[d.name] = accuracy_difference_tmp
         accuracy_differences.append(accuracy_difference_tmp)
     accuracy_difference['all'] = sum(accuracy_differences) / len(accuracy_differences)
+    assert 0 <= accuracy_difference['all'] <= 1
     return accuracy_difference
 
 
@@ -54,8 +58,10 @@ def get_observed_consistency(model, datasets, config):
                         metric_tmp = a.ErrorConsistency().analysis(df_model_cond, df_human)['observed_consistency']
                         metrics_dataset.append(metric_tmp)
         observed_consistency[d.name] = sum(metrics_dataset) / len(metrics_dataset)
+        assert 0 <= observed_consistency[d.name] <= 1
         observed_consistencies.append(observed_consistency[d.name])
     observed_consistency['all'] = sum(observed_consistencies) / len(observed_consistencies)
+    assert 0 <= observed_consistency['all'] <= 1
     return observed_consistency
 
 
@@ -82,8 +88,10 @@ def get_error_consistency(model, datasets, config):
                         metric_tmp = a.ErrorConsistency().analysis(df_model_cond, df_human)['error_consistency']
                         metrics_dataset.append(metric_tmp)
         error_consistency[d.name] = sum(metrics_dataset) / len(metrics_dataset)
+        assert 0 <= error_consistency[d.name] <= 1
         error_consistencies.append(error_consistency[d.name])
     error_consistency['all'] = sum(error_consistencies) / len(error_consistencies)
+    assert 0 <= error_consistency['all'] <= 1
     return error_consistency
 
 
@@ -99,9 +107,11 @@ def get_shape_bias(model, datasets, config):
     for cl in classes:
         df_class_selection = df_selection.query("category == '{}'".format(cl))
         shape_bias_tmp = a.ShapeBias().analysis(df=df_class_selection)['shape-bias']
+        assert 0 <= shape_bias_tmp <= 1
         shape_bias[cl] = shape_bias_tmp
         shape_biases.append(shape_bias_tmp)
     shape_bias['all'] = sum(shape_biases) / len(shape_biases)
+    assert 0 <= shape_bias['all'] <= 1
     return shape_bias
 
 
