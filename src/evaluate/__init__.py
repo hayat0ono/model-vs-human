@@ -1,2 +1,2 @@
-from evaluate import evaluate
-from get_metrics import get_metrics
+from src.evaluate.evaluate import evaluate
+from src.evaluate.get_metrics import get_metrics

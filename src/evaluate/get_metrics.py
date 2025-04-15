@@ -1,6 +1,6 @@
 from modelvshuman.datasets.experiments import get_experiments
-from get_experimental_data import get_experimental_data
 from modelvshuman.plotting import analyses as a
+from .get_experimental_data import get_experimental_data
 
 
 def get_ood_accuracy(model, datasets):

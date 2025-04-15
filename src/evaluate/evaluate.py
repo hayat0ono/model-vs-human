@@ -12,7 +12,7 @@ def evaluate(models):
     for model in models:
         datasets_tmp = []
         for dataset in datasets:
-            file_names = os.listdir(c.PROJ_DIR / f'raw-data/{dataset}/')
+            file_names = os.listdir(os.path.join(c.PROJ_DIR, f'raw-data/{dataset}/'))
             if len([item for item in file_names if f'_{model.replace("_", "-")}_' in item]) == 0:
                 datasets_tmp.append(dataset)
         if len(datasets_tmp) == 0:
