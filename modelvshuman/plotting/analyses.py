@@ -98,7 +98,10 @@ class ShapeBias(Analysis):
         df2 = df.loc[df.correct_shape != df.correct_texture]
         fraction_correct_shape = len(df2.loc[df2.object_response == df2.correct_shape]) / len(df)
         fraction_correct_texture = len(df2.loc[df2.object_response == df2.correct_texture]) / len(df)
-        shape_bias = fraction_correct_shape / (fraction_correct_shape + fraction_correct_texture)
+        if fraction_correct_shape == 0 and fraction_correct_texture == 0:
+            shape_bias = 0
+        else:
+            shape_bias = fraction_correct_shape / (fraction_correct_shape + fraction_correct_texture)
 
         result_dict = {"fraction-correct-shape": fraction_correct_shape,
                        "fraction-correct-texture": fraction_correct_texture,
