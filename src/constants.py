@@ -27,7 +27,7 @@ METRIC_TO_DATASET_LIST = {
     'accuracy_difference': DEFAULT_DATASETS,
     'observed_consistency': DEFAULT_DATASETS,
     'error_consistency': DEFAULT_DATASETS,
-    "shape-bias": ["cue-conflict"],
+    "shape_bias": ["cue-conflict"],
     }
 
 
