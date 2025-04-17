@@ -106,7 +106,7 @@ def get_error_consistency(model, datasets, config):
         assert -1 <= error_consistency[d.name] <= 1, f'model: {model}, dataset: {d.name}, error consistency: {error_consistency[d.name]}'
         error_consistencies.append(error_consistency[d.name])
     error_consistency['all'] = sum(error_consistencies) / len(error_consistencies)
-    assert 0 <= error_consistency['all'] <= 1
+    assert -1 <= error_consistency['all'] <= 1
     print(f"{model}, error consistency: {error_consistency['all']}")
     return error_consistency
 
