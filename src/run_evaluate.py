@@ -9,7 +9,7 @@ os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 
 
 m.add_my_model(c.MODEL_ROOT)
-time.sleep(10)
+time.sleep(5)
 my_models = m.get_my_model_names(c.MODEL_ROOT)
 my_model_to_model_name = {}
 for my_model in my_models:
